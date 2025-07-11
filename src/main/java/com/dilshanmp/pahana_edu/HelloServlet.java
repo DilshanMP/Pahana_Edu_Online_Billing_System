@@ -1,4 +1,4 @@
-package org.example.pahanaedu;
+package com.dilshanmp.pahana_edu;
 
 import java.io.*;
 import javax.servlet.http.*;
