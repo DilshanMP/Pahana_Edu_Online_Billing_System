@@ -41,7 +41,7 @@ The Pahana Edu Online Billing System is an academic project that provides a simp
 - **Frontend**: HTML5, CSS3, JSP
 - **Build Tool**: Maven
 - **App Server**: Apache Tomcat 9.x
-- **IDE**: IntelliJ IDEA (recommended)
+- **IDE**: IntelliJ IDEA 
 
 ---
 ## 🎨 Design Patterns & Principles
