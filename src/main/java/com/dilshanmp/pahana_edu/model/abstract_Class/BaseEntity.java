@@ -1,4 +1,4 @@
-package com.dilshanmp.pahana_edu.model;
+package com.dilshanmp.pahana_edu.model.abstract_Class;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

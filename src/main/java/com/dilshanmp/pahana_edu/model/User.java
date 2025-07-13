@@ -1,5 +1,7 @@
 package com.dilshanmp.pahana_edu.model;
 
+import com.dilshanmp.pahana_edu.model.abstract_Class.BaseEntity;
+
 public class User extends BaseEntity {
     public String username;
     public String password;
