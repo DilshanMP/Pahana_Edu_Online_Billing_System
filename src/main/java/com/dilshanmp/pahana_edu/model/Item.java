@@ -30,7 +30,7 @@ public class Item extends BaseEntity {
         return name + " (" + itemCode + ")";
     }
 
-    // Business method
+
     public BigDecimal calculateTotal(int quantity) {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
