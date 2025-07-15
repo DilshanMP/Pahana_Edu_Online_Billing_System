@@ -12,6 +12,8 @@ public abstract class BaseEntity implements Serializable {
         this.updatedAt = LocalDateTime.now();
     }
     public abstract String getDisplayName(); //--> Abstract method
+
+    //Getters & Setters
     public Integer getId() {
         return id;
     }

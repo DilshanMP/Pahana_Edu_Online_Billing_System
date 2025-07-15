@@ -12,12 +12,21 @@ public class User extends BaseEntity {
         super();
     }
 
+    public User(String username , String password , String fullName){
+        super();
+        this.username = username;
+        this.password = password;
+        this.fullName =fullName;
+        this.role = "USER";
+    }
+
     @Override   // use in Polymorphism
     public String getDisplayName() {  // --> Implementation of abstract method
         return fullName;
     }
 
 
+    // < ----  Getters and setters ---- >
     public String getUsername() {
         return username;
     }

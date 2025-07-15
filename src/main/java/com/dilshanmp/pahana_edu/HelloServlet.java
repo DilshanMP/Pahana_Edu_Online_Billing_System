@@ -12,8 +12,6 @@ public class HelloServlet extends HttpServlet {
         message = "Hello World!";
     }
 
-
-
     public void destroy() {
     }
 }
