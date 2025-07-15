@@ -15,7 +15,7 @@ public class HelloServlet extends HttpServlet {
         try {
             Connection conn = DBConnection.getInstance().getConnection();
             if (conn != null && !conn.isClosed()) {
-                resp.getWriter().println("<h3 style='color:green;'>✅ Database connection successful!</h3>");
+                resp.getWriter().println("<h3 style='color:green;'>Database connection successful!</h3>");
             } else {
                 resp.getWriter().println("<h3 style='color:red;'> Database connection failed!</h3>");
             }
