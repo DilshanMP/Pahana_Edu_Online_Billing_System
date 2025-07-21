@@ -1,11 +1,11 @@
 package com.dilshanmp.pahana_edu.dao.impl;
 
-import com.dilshanmp.pahana_edu.model.Item;
+import com.dilshanmp.pahana_edu.model.Billitem;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ItemDAO {
-    Optional<Item> findByCode(String itemCode);
-    List<Item> search(String keyword);
+    Optional<Billitem> findByCode(String itemCode);
+    List<Billitem> search(String keyword);
 }

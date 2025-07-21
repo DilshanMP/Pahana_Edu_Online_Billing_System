@@ -1,22 +1,21 @@
 package com.dilshanmp.pahana_edu.model;
 
-import com.dilshanmp.pahana_edu.model.abstract_Class.BaseEntity;
 
-public class User extends BaseEntity {
+public class User extends BaseModel {
     public String username;
     public String password;
     public String fullName;
     public String role;
 
-    public User(){   // ---> is this Constructors
+    public User() {   // ---> is this Constructors
         super();
     }
 
-    public User(String username , String password , String fullName){
+    public User(String username, String password, String fullName) {
         super();
         this.username = username;
         this.password = password;
-        this.fullName =fullName;
+        this.fullName = fullName;
         this.role = "USER";
     }
 

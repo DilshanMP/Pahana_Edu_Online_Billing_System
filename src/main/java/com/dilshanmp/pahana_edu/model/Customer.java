@@ -1,8 +1,8 @@
 package com.dilshanmp.pahana_edu.model;
 
-import com.dilshanmp.pahana_edu.model.abstract_Class.BaseEntity;
 
-public class Customer extends BaseEntity {
+
+public class Customer extends BaseModel {
 
     private String customerCode;
     private String name;

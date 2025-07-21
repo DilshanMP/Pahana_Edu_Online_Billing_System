@@ -1,84 +1,74 @@
 package com.dilshanmp.pahana_edu.model;
 
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Bill {
+public class Bill extends BaseModel {
+
+
+    private String billNumber;
     private Customer customer;
-    private List<BillItem> items;  // Using ArrayList (Java Collections)
-    private BigDecimal totalAmount;
+    private int customerId;
+    private double totalAmount;
+    private Date billDate;
+    private User createdBy;
+    private int createdById;
+    private List<Billitem> billitems; // < --------Using ArrayList Collection
 
     public Bill() {
-        this.items = new ArrayList<>();
-        this.totalAmount = BigDecimal.ZERO;
+        super();
+        this.billitems = new ArrayList<>();
+        this.billDate = new Date(System.currentTimeMillis());
     }
 
-    public Bill(Customer customer) {
+    public Bill(String billNumber, Customer customer, User createdBy) {
         this();
+        this.billNumber = billNumber;
         this.customer = customer;
+        this.customerId = customer.getId();
+        this.createdBy = createdBy;
+        this.createdById = createdBy.getId();
+
     }
 
-    // Inner class for Bill Items
-    public static class BillItem {
-        private Item item;
-        private int quantity;
-        private BigDecimal amount;
-
-        public BillItem(Item item, int quantity) {
-            this.item = item;
-            this.quantity = quantity;
-            this.amount = item.calculateTotal(quantity);
-        }
-
-        // Getters and setters
-        public Item getItem() {
-            return item;
-        }
-
-        public void setItem(Item item) {
-            this.item = item;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        public BigDecimal getAmount() {
-            return amount;
-        }
-
-        public void setAmount(BigDecimal amount) {
-            this.amount = amount;
-        }
+    //--- > Implementation of abstract method <----- //
+    @Override
+    public String getDisplayName() {
+        return "Bill #" + this.billNumber;
     }
 
-    // Business methods
-    public void addItem(Item item, int quantity) {
-        BillItem billItem = new BillItem(item, quantity);
-        items.add(billItem);
-        calculateTotal();
+    //Apply to Business logic methods --- >
+    public void addBillItem(Billitem item) {
+        this.billitems.add(item);
+        calculateTotalAmount();
     }
 
-    public void removeItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            items.remove(index);
-            calculateTotal();
+    public void removeBillItem(Billitem item) {
+        this.billitems.remove(item);
+        calculateTotalAmount();
+    }
+
+    private void calculateTotalAmount() {
+        this.totalAmount = 0;
+        for (Billitem item : billitems) {
+            this.totalAmount += item.getTotalPrice();
         }
     }
-
-    private void calculateTotal() {
-        totalAmount = items.stream()
-                .map(BillItem::getAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    //Bill Number Generate method
+    public static String generateBillNumber(){
+        return "BILL-" + System.currentTimeMillis();
     }
 
-    // Getters and setters
+    public String getBillNumber() {
+        return billNumber;
+    }
+
+    public void setBillNumber(String billNumber) {
+        this.billNumber = billNumber;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -87,16 +77,65 @@ public class Bill {
         this.customer = customer;
     }
 
-    public List<BillItem> getItems() {
-        return items;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setItems(List<BillItem> items) {
-        this.items = items;
-        calculateTotal();
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public BigDecimal getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public int getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(int createdById) {
+        this.createdById = createdById;
+    }
+
+    public List<Billitem> getBillitems() {
+        return billitems;
+    }
+
+    public void setBillitems(List<Billitem> billitems) {
+        this.billitems = billitems;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id" + id +
+                "billNumber='" + billNumber + '\'' +
+                ", customerId=" + customerId +
+                ", totalAmount=" + totalAmount +
+                ", billDate=" + billDate +
+                ", createdBy=" + createdBy +
+                ", createdById=" + createdById +
+                ", itemCount=" + billitems.size() +
+                '}';
     }
 }
