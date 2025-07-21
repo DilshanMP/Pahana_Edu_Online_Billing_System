@@ -1,77 +1,88 @@
 package com.dilshanmp.pahana_edu.model;
 
 
-import java.math.BigDecimal;
 
-public class Billitem extends BaseModel {
-    private String itemCode;
-    private String name;
-    private String description;
-    private BigDecimal unitPrice;
-    private String unitType;
+
+/** * BillItem model class for individual items in a bill ----- >*/
+public class Billitem  {
+    private int id;
+    private int billId;
+    private Item item;
+    private int itemId;
+    private int quantity;
+    private double unitPrice;
+    private double totalPrice;
 
     // Constructors
     public Billitem() {
-        super();
     }
 
-    public Billitem(String itemCode, String name, String description, BigDecimal unitPrice, String unitType) {
-        super();
-        this.itemCode = itemCode;
-        this.name = name;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.unitType = unitType;
+    public Billitem(Item item , int quantity){
+        this.item = item;
+        this.itemId = item.getId();
+        this.quantity = quantity;
+        this.unitPrice = item.getUnitPrice();
+        this.totalPrice = calculateTotalPrice();
+
+    }
+    public double calculateTotalPrice() {
+        this.totalPrice = this.unitPrice * this.quantity;
+        return this.totalPrice;
     }
 
-    @Override
-    public String getDisplayName() {
-        return name + " (" + itemCode + ")";
+    public int getId() {
+        return id;
     }
 
-
-    public BigDecimal calculateTotal(int quantity) {
-        return unitPrice.multiply(BigDecimal.valueOf(quantity));
+    public void setId(int id) {
+        this.id = id;
     }
 
-    // Getters and setters
-    public String getItemCode() {
-        return itemCode;
+    public int getBillId() {
+        return billId;
     }
 
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
+    public void setBillId(int billId) {
+        this.billId = billId;
     }
 
-    public String getName() {
-        return name;
+    public Item getItem() {
+        return item;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public String getDescription() {
-        return description;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
-    public BigDecimal getUnitPrice() {
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public String getUnitType() {
-        return unitType;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setUnitType(String unitType) {
-        this.unitType = unitType;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

@@ -1,10 +1,8 @@
 package com.dilshanmp.pahana_edu.model;
 
 
-
 public class Customer extends BaseModel {
 
-    private String customerCode;
     private String name;
     private String email;
     private String phone;
@@ -16,7 +14,6 @@ public class Customer extends BaseModel {
 
     public Customer(String customerCode, String name, String email, String phone, String address) {
         super();
-        this.customerCode = customerCode;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -24,16 +21,8 @@ public class Customer extends BaseModel {
     }
 
     @Override
-    public String getDisplayName() {
-        return name +"("+customerCode+")";
-    }
-
-    public String getCustomerCode() {
-        return customerCode;
-    }
-
-    public void setCustomerCode(String customerCode) {
-        this.customerCode = customerCode;
+    public String getDisplayName() {  /** < --- abstract method*/
+        return this.name;
     }
 
     public String getName() {
@@ -66,5 +55,16 @@ public class Customer extends BaseModel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
