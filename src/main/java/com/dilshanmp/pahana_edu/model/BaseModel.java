@@ -13,7 +13,7 @@ public abstract class BaseModel{
        this.updateAt = new Timestamp(System.currentTimeMillis());
    }
 
-
+  public abstract String getDisplayName();
    //Getters and Setters
     public int getId() {
         return id;
@@ -39,7 +39,8 @@ public abstract class BaseModel{
         this.updateAt = updateAt;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{id=" + id + "}";
+    }
 }
