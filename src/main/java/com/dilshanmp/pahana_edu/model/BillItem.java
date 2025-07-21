@@ -4,7 +4,7 @@ package com.dilshanmp.pahana_edu.model;
 
 
 /** * BillItem model class for individual items in a bill ----- >*/
-public class Billitem  {
+public class BillItem {
     private int id;
     private int billId;
     private Item item;
@@ -14,10 +14,10 @@ public class Billitem  {
     private double totalPrice;
 
     // Constructors
-    public Billitem() {
+    public BillItem() {
     }
 
-    public Billitem(Item item , int quantity){
+    public BillItem(Item item , int quantity){
         this.item = item;
         this.itemId = item.getId();
         this.quantity = quantity;

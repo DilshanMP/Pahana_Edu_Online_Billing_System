@@ -15,7 +15,7 @@ import java.util.List;
  * Demonstrates Dependency Inversion Principle (DIP) - depends on abstraction - UserDAO
  */
 
-public class UserDaoImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     private Connection getConnection() throws SQLException {
         return DBConnection.getInstance().getConnection();
@@ -147,7 +147,8 @@ public class UserDaoImpl implements UserDAO {
         }
         return null;
     }
-     // -- Helper method to extract User from ResultSet
+
+    // -- Helper method to extract User from ResultSet
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));

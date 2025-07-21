@@ -1,8 +1,8 @@
 package com.dilshanmp.pahana_edu.model;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Bill extends BaseModel {
@@ -12,15 +12,16 @@ public class Bill extends BaseModel {
     private Customer customer;
     private int customerId;
     private double totalAmount;
-    private Date billDate;
+    private java.sql.Date billDate;
     private User createdBy;
     private int createdById;
-    private List<Billitem> billitems; // < --------Using ArrayList Collection
+    private List<BillItem> billItems; // Using ArrayList collection
 
+    // Constructors
     public Bill() {
         super();
-        this.billitems = new ArrayList<>();
-        this.billDate = new Date(System.currentTimeMillis());
+        this.billItems = new ArrayList<>();
+        this.billDate = new java.sql.Date(System.currentTimeMillis());
     }
 
     public Bill(String billNumber, Customer customer, User createdBy) {
@@ -30,37 +31,38 @@ public class Bill extends BaseModel {
         this.customerId = customer.getId();
         this.createdBy = createdBy;
         this.createdById = createdBy.getId();
-
     }
 
-    //--- > Implementation of abstract method <----- //
+    // Implementation of abstract method
     @Override
     public String getDisplayName() {
         return "Bill #" + this.billNumber;
     }
 
-    //Apply to Business logic methods --- >
-    public void addBillItem(Billitem item) {
-        this.billitems.add(item);
+    // Business logic methods
+    public void addBillItem(BillItem item) {
+        this.billItems.add(item);
         calculateTotalAmount();
     }
 
-    public void removeBillItem(Billitem item) {
-        this.billitems.remove(item);
+    public void removeBillItem(BillItem item) {
+        this.billItems.remove(item);
         calculateTotalAmount();
     }
 
-    private void calculateTotalAmount() {
+    public void calculateTotalAmount() {
         this.totalAmount = 0;
-        for (Billitem item : billitems) {
+        for (BillItem item : billItems) {
             this.totalAmount += item.getTotalPrice();
         }
     }
-    //Bill Number Generate method
-    public static String generateBillNumber(){
+
+    // Generate unique bill number
+    public static String generateBillNumber() {
         return "BILL-" + System.currentTimeMillis();
     }
 
+    // Getters and Setters
     public String getBillNumber() {
         return billNumber;
     }
@@ -75,6 +77,7 @@ public class Bill extends BaseModel {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+        this.customerId = customer.getId();
     }
 
     public int getCustomerId() {
@@ -93,7 +96,7 @@ public class Bill extends BaseModel {
         this.totalAmount = totalAmount;
     }
 
-    public Date getBillDate() {
+    public java.sql.Date getBillDate() {
         return billDate;
     }
 
@@ -107,6 +110,7 @@ public class Bill extends BaseModel {
 
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+        this.createdById = createdBy.getId();
     }
 
     public int getCreatedById() {
@@ -117,25 +121,25 @@ public class Bill extends BaseModel {
         this.createdById = createdById;
     }
 
-    public List<Billitem> getBillitems() {
-        return billitems;
+    public List<BillItem> getBillItems() {
+        return billItems;
     }
 
-    public void setBillitems(List<Billitem> billitems) {
-        this.billitems = billitems;
+    public void setBillItems(List<BillItem> billItems) {
+        this.billItems = billItems;
+        calculateTotalAmount();
     }
 
     @Override
     public String toString() {
         return "Bill{" +
-                "id" + id +
-                "billNumber='" + billNumber + '\'' +
+                "id=" + id +
+                ", billNumber='" + billNumber + '\'' +
                 ", customerId=" + customerId +
                 ", totalAmount=" + totalAmount +
                 ", billDate=" + billDate +
-                ", createdBy=" + createdBy +
                 ", createdById=" + createdById +
-                ", itemCount=" + billitems.size() +
+                ", itemCount=" + billItems.size() +
                 '}';
     }
 }
