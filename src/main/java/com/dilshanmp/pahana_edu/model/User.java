@@ -5,18 +5,20 @@ public class User extends BaseModel {
     public String username;
     public String password;
     public String fullName;
-    public String role;
+    private String email;
+
 
     public User() {   // ---> is this Constructors
         super();
     }
 
-    public User(String username, String password, String fullName) {
+    public User(String username, String password, String fullName,String email) {
         super();
         this.username = username;
         this.password = password;
         this.fullName = fullName;
-        this.role = "USER";
+        this.email = email;
+
     }
 
     @Override   // use in Polymorphism
@@ -26,6 +28,8 @@ public class User extends BaseModel {
 
 
     // < ----  Getters and setters ---- >
+
+
     public String getUsername() {
         return username;
     }
@@ -50,13 +54,22 @@ public class User extends BaseModel {
         this.fullName = fullName;
     }
 
-    public String getRole() {
-        return role;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id" + id +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
