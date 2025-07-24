@@ -1,53 +1,139 @@
 package com.dilshanmp.pahana_edu.service.impl;
 
+
+import com.dilshanmp.pahana_edu.dao.CustomerDAO;
+import com.dilshanmp.pahana_edu.dao.impl.CustomerDAOImpl;
 import com.dilshanmp.pahana_edu.model.Customer;
 import com.dilshanmp.pahana_edu.service.CustomerService;
 
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
-    @Override
-    public Customer save(Customer entity) throws Exception {
-        return null;
+
+    private CustomerDAO customerDAO;
+
+    public CustomerServiceImpl() {
+        this.customerDAO = new CustomerDAOImpl();
     }
 
     @Override
-    public Customer update(Customer entity) throws Exception {
-        return null;
+    public Customer save(Customer customer) throws Exception {
+        if (!validate(customer)) {
+            throw new IllegalArgumentException("Invalid customer data");
+        }
+
+        // Check if email already exists
+        if (customer.getEmail() != null && !customer.getEmail().isEmpty()) {
+            if (isEmailExists(customer.getEmail(), null)) {
+                throw new Exception("Email already exists");
+            }
+        }
+
+        return customerDAO.save(customer);
     }
 
     @Override
-    public Customer delete(Customer entity) throws Exception {
-        return null;
+    public boolean update(Customer customer) throws Exception {
+        if (!validate(customer)) {
+            throw new IllegalArgumentException("Invalid customer data");
+        }
+
+        // Check if customer exists
+        Customer existing = customerDAO.findById(customer.getId());
+        if (existing == null) {
+            throw new Exception("Customer not found");
+        }
+
+        // Check if email already exists for another customer
+        if (customer.getEmail() != null && !customer.getEmail().isEmpty()) {
+            if (isEmailExists(customer.getEmail(), customer.getId())) {
+                throw new Exception("Email already exists for another customer");
+            }
+        }
+
+        return customerDAO.update(customer);
+    }
+
+    @Override
+    public boolean delete(int id) throws Exception {
+        // Check if customer exists
+        Customer customer = customerDAO.findById(id);
+        if (customer == null) {
+            throw new Exception("Customer not found");
+        }
+
+        // TODO: Check if customer has any bills before deleting
+
+        return customerDAO.delete(id);
     }
 
     @Override
     public Customer findById(int id) throws Exception {
-        return null;
+        Customer customer = customerDAO.findById(id);
+        if (customer == null) {
+            throw new Exception("Customer not found");
+        }
+        return customer;
     }
 
     @Override
-    public Customer findAll(int id) throws Exception {
-        return null;
+    public List<Customer> findAll() throws Exception {
+        return customerDAO.findAll();
     }
 
     @Override
-    public boolean validate(Customer entity) {
-        return false;
+    public boolean validate(Customer customer) {
+        if (customer == null) {
+            return false;
+        }
+        if (customer.getName() == null || customer.getName().trim().isEmpty()) {
+            return false;
+        }
+        if (customer.getEmail() != null && !customer.getEmail().trim().isEmpty()) {
+            // Basic email validation
+            if (!customer.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                return false;
+            }
+        }
+        if (customer.getPhone() != null && !customer.getPhone().trim().isEmpty()) {
+            // Basic phone validation (Sri Lankan format)
+            if (!customer.getPhone().matches("^[0-9]{10}$")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public List<Customer> searchByName(String searchTerm) throws Exception {
-        return null;
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return findAll();
+        }
+        return customerDAO.searchByName(searchTerm.trim());
     }
 
     @Override
-    public Boolean isEmailExists(String email, Integer excludeId) throws Exception {
-        return null;
+    public boolean isEmailExists(String email, Integer excludeId) throws Exception {
+        if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+
+        Customer customer = customerDAO.findByEmail(email.trim());
+        if (customer == null) {
+            return false;
+        }
+
+        // If excludeId is provided, check if it's the same customer
+        if (excludeId != null && customer.getId() == excludeId) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
-    public int getTotalCustomer() throws Exception {
-        return 0;
+    public int getTotalCustomers() throws Exception {
+        List<Customer> customers = customerDAO.findAll();
+        return customers.size();
     }
 }

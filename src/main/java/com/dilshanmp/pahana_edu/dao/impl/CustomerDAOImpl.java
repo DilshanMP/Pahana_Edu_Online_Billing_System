@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Customer DAO Implementation
- */
+/** * Customer DAO Implementation */
 public class CustomerDAOImpl implements CustomerDAO {
 
     private Connection getConnection() throws SQLException {

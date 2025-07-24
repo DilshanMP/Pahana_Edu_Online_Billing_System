@@ -15,12 +15,17 @@ public class Item extends BaseModel {
 
     public Item() {
     }
+
     public Item(String name, String description, double unitPrice, int stockQuantity) {
         super();
         this.name = name;
         this.description = description;
         this.unitPrice = unitPrice;
         this.stockQuantity = stockQuantity;
+    }
+
+    public boolean hasEnoughStock(int requestedQuantity) {
+        return stockQuantity >= requestedQuantity;
     }
 
     public String getName() {

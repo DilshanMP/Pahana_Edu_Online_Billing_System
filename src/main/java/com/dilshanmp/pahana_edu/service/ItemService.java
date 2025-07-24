@@ -1,10 +1,13 @@
 package com.dilshanmp.pahana_edu.service;
 
+
 import com.dilshanmp.pahana_edu.model.Item;
 
 import java.util.List;
 
-public interface ItemService extends BaseService<Item>{
+
+public interface ItemService extends BaseService<Item> {
+
 
     List<Item> searchByName(String namePattern) throws Exception;
 
@@ -16,7 +19,6 @@ public interface ItemService extends BaseService<Item>{
 
 
     boolean hasSufficientStock(int itemId, int requiredQuantity) throws Exception;
-
 
     List<Item> getLowStockItems() throws Exception;
 }

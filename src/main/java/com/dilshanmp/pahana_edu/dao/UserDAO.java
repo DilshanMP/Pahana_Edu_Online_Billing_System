@@ -6,10 +6,7 @@ import com.dilshanmp.pahana_edu.model.User;
 
 import java.sql.SQLException;
 
-/** * User DAO interface extending Generic DAO ------ //
- *
- * Single Responsibility Principle SRP - handles only User data access
- */
+
 public interface UserDAO extends GenericDAO<User, Integer> {
 
 

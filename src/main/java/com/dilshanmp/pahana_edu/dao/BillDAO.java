@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-/**
- * Bill DAO interface extending Generic DAO
- */
+/** * Bill DAO interface extending Generic DAO */
 public interface BillDAO extends GenericDAO<Bill, Integer> {
 
 

@@ -7,9 +7,7 @@ import com.dilshanmp.pahana_edu.model.Customer;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Customer DAO interface extending Generic DAO
- */
+/** * Customer DAO interface extending Generic DAO */
 public interface CustomerDAO extends GenericDAO<Customer, Integer> {
 
 
