@@ -32,62 +32,102 @@
         }
     </style>
 </head>
+<style>
+    .sidebar {
+        background-color: #1e293b;
+        min-height: 100vh;
+        width: 250px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 20px 0;
+    }
+
+    .sidebar-brand {
+        padding: 0 20px 30px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: #94a3b8;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-menu a:hover {
+        background-color: #334155;
+        color: #fff;
+    }
+
+    .sidebar-menu a.active {
+        background-color: #3b82f6;
+        color: #fff;
+    }
+
+    .sidebar-menu i {
+        margin-right: 12px;
+        font-size: 1.1rem;
+    }
+</style>
 <body class="bg-light">
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark no-print">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/dashboard">
-            <i class="bi bi-shop me-2"></i>Pahana Edu
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">
-                        <i class="bi bi-speedometer2 me-1"></i>Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer">
-                        <i class="bi bi-people me-1"></i>Customers
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/item">
-                        <i class="bi bi-box me-1"></i>Items
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/bill">
-                        <i class="bi bi-receipt me-1"></i>Billing
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/help">
-                        <i class="bi bi-question-circle me-1"></i>Help
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle me-1"></i>${sessionScope.fullName}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
-                                <i class="bi bi-box-arrow-right me-2"></i>Logout
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <i class="bi bi-shop me-2"></i>Pahana Edu
     </div>
-</nav>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="${pageContext.request.contextPath}/dashboard" class="active">
+                <i class="bi bi-speedometer2"></i>Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/customer">
+                <i class="bi bi-people"></i>Customers
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/item">
+                <i class="bi bi-box"></i>Items
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/bill">
+                <i class="bi bi-receipt"></i>Billing
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/bill?action=list">
+                <i class="bi bi-list-ul"></i>All Bills
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/help">
+                <i class="bi bi-question-circle"></i>Help
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/logout">
+                <i class="bi bi-box-arrow-right"></i>Logout
+            </a>
+        </li>
+    </ul>
+</div>
 
 <!-- Main Content -->
 <div class="container my-4 invoice-container">

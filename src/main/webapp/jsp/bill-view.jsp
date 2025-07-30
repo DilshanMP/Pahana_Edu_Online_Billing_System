@@ -32,6 +32,58 @@
         }
     </style>
 </head>
+<style>
+    .sidebar {
+        background-color: #1e293b;
+        min-height: 100vh;
+        width: 250px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 20px 0;
+    }
+
+    .sidebar-brand {
+        padding: 0 20px 30px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: #94a3b8;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-menu a:hover {
+        background-color: #334155;
+        color: #fff;
+    }
+
+    .sidebar-menu a.active {
+        background-color: #3b82f6;
+        color: #fff;
+    }
+
+    .sidebar-menu i {
+        margin-right: 12px;
+        font-size: 1.1rem;
+    }
+</style>
 <body class="bg-light">
 <!-- Navigation Bar -->
 <div class="sidebar">

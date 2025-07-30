@@ -19,352 +19,422 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .navbar-brand {
-            font-weight: bold;
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .stat-card {
-            border: none;
-            border-radius: 15px;
-            transition: transform 0.2s;
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #1e293b;
+            min-height: 100vh;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px 0;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+        .sidebar-brand {
+            padding: 0 20px 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
         }
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #334155;
+            color: #fff;
+        }
+
+        .sidebar-menu a.active {
+            background-color: #3b82f6;
+            color: #fff;
+        }
+
+        .sidebar-menu i {
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3b82f6;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: white;
+            font-weight: 600;
         }
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        .bg-gradient-success {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+
+        .stat-card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
         }
-        .bg-gradient-info {
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
         }
-        .bg-gradient-warning {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
+
+        .stat-title {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-change.positive {
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            color: #ef4444;
+        }
+
+        /* Charts */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #334155;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
         .chart-container {
             position: relative;
             height: 300px;
-            margin-top: 20px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .action-card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            background-color: #334155;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #3b82f6;
+        }
+
+        /* Color Variants */
+        .bg-blue { background-color: #3b82f6; }
+        .bg-green { background-color: #10b981; }
+        .bg-yellow { background-color: #f59e0b; }
+        .bg-purple { background-color: #8b5cf6; }
+        .bg-red { background-color: #ef4444; }
+        .bg-cyan { background-color: #06b6d4; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-light">
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/dashboard">
-            <i class="bi bi-shop me-2"></i>Pahana Edu
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/dashboard">
-                        <i class="bi bi-speedometer2 me-1"></i>Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer">
-                        <i class="bi bi-people me-1"></i>Customers
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/item">
-                        <i class="bi bi-box me-1"></i>Items
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/bill">
-                        <i class="bi bi-receipt me-1"></i>Billing
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/help">
-                        <i class="bi bi-question-circle me-1"></i>Help
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle me-1"></i>${sessionScope.fullName}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
-                                <i class="bi bi-box-arrow-right me-2"></i>Logout
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <i class="bi bi-shop me-2"></i>Pahana Edu
     </div>
-</nav>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="${pageContext.request.contextPath}/dashboard" class="active">
+                <i class="bi bi-speedometer2"></i>Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/customer">
+                <i class="bi bi-people"></i>Customers
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/item">
+                <i class="bi bi-box"></i>Items
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/bill">
+                <i class="bi bi-receipt"></i>Billing
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/bill?action=list">
+                <i class="bi bi-list-ul"></i>All Bills
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/help">
+                <i class="bi bi-question-circle"></i>Help
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/logout">
+                <i class="bi bi-box-arrow-right"></i>Logout
+            </a>
+        </li>
+    </ul>
+</div>
 
 <!-- Main Content -->
-<div class="container my-4">
-    <div class="row mb-4">
-        <div class="col">
-            <h2>Dashboard</h2>
-        </div>
-        <div class="col text-end">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    <i class="bi bi-download me-2"></i>Export Reports
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/export?type=customers&format=excel">
-                            <i class="bi bi-file-earmark-excel me-2"></i>Export Customers
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/export?type=items&format=excel">
-                            <i class="bi bi-file-earmark-excel me-2"></i>Export Inventory
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/export?type=sales&format=excel">
-                            <i class="bi bi-file-earmark-excel me-2"></i>Export Sales Report
-                        </a>
-                    </li>
-                </ul>
+<div class="main-content">
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard</h1>
+        <div class="user-info">
+            <span>Welcome, ${sessionScope.fullName}</span>
+            <div class="user-avatar">
+                ${sessionScope.fullName.charAt(0)}
             </div>
         </div>
     </div>
 
-    <!-- Error Alert -->
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-triangle-fill me-2"></i>${error}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    </c:if>
-
-    <!-- Statistics Cards -->
-    <div class="row g-4 mb-4">
-        <!-- Total Customers -->
-        <div class="col-md-6 col-lg-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon bg-gradient-primary me-3">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-muted mb-1">Total Customers</h6>
-                            <h3 class="mb-0">${totalCustomers}</h3>
-                        </div>
-                    </div>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <!-- Total Sales -->
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Total Sales</span>
+                <div class="stat-icon bg-blue">
+                    <i class="bi bi-currency-dollar text-white"></i>
                 </div>
             </div>
-        </div>
-
-        <!-- Total Items -->
-        <div class="col-md-6 col-lg-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon bg-gradient-success me-3">
-                            <i class="bi bi-box"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-muted mb-1">Total Items</h6>
-                            <h3 class="mb-0">${totalItems}</h3>
-                            <c:if test="${lowStockCount > 0}">
-                                <small class="text-warning">
-                                    <i class="bi bi-exclamation-triangle"></i> ${lowStockCount} low stock
-                                </small>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat-value">Rs <fmt:formatNumber value="${totalRevenue}" pattern="#,##0"/></div>
+            <div class="stat-change positive">
+                <i class="bi bi-arrow-up"></i>
+                <span>+8%</span>
             </div>
         </div>
 
         <!-- Total Bills -->
-        <div class="col-md-6 col-lg-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon bg-gradient-info me-3">
-                            <i class="bi bi-receipt"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-muted mb-1">Total Bills</h6>
-                            <h3 class="mb-0">${totalBills}</h3>
-                        </div>
-                    </div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Total Bills</span>
+                <div class="stat-icon bg-green">
+                    <i class="bi bi-receipt text-white"></i>
                 </div>
+            </div>
+            <div class="stat-value">${totalBills}</div>
+            <div class="stat-change positive">
+                <i class="bi bi-arrow-up"></i>
+                <span>+12%</span>
             </div>
         </div>
 
-        <!-- Total Revenue -->
-        <div class="col-md-6 col-lg-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon bg-gradient-warning me-3">
-                            <i class="bi bi-currency-dollar"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-muted mb-1">Total Revenue</h6>
-                            <h3 class="mb-0">Rs. <fmt:formatNumber value="${totalRevenue}" pattern="#,##0.00"/></h3>
-                        </div>
-                    </div>
+        <!-- Customers -->
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Customers</span>
+                <div class="stat-icon bg-purple">
+                    <i class="bi bi-people text-white"></i>
                 </div>
             </div>
+            <div class="stat-value">${totalCustomers}</div>
+            <div class="stat-change positive">
+                <i class="bi bi-arrow-up"></i>
+                <span>+5%</span>
+            </div>
+        </div>
+
+        <!-- Items -->
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Total Items</span>
+                <div class="stat-icon bg-yellow">
+                    <i class="bi bi-box text-white"></i>
+                </div>
+            </div>
+            <div class="stat-value">${totalItems}</div>
+            <c:if test="${lowStockCount > 0}">
+                <div class="stat-change negative">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <span>${lowStockCount} low stock</span>
+                </div>
+            </c:if>
         </div>
     </div>
 
-    <!-- Charts Row -->
-    <div class="row mb-4">
-        <!-- Monthly Sales Chart -->
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Monthly Sales Trend</h5>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="monthlySalesChart"></canvas>
-                    </div>
-                </div>
+    <!-- Charts -->
+    <div class="chart-grid">
+        <!-- Revenue Chart -->
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3 class="chart-title">Revenue Overview</h3>
+                <select class="form-select form-select-sm" style="width: auto; background-color: #334155; color: #e2e8f0; border-color: #475569;">
+                    <option>This Month</option>
+                    <option>Last Month</option>
+                    <option>This Year</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
             </div>
         </div>
 
-        <!-- Top Selling Items -->
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-award me-2"></i>Top Selling Items</h5>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="topItemsChart"></canvas>
-                    </div>
-                </div>
+        <!-- Top Products -->
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3 class="chart-title">Top Selling Items</h3>
+            </div>
+            <div class="chart-container">
+                <canvas id="topItemsChart"></canvas>
             </div>
         </div>
     </div>
-
-    <!-- Second Charts Row -->
-    <div class="row mb-4">
-        <!-- Weekly Sales -->
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-calendar-week me-2"></i>Last 7 Days Sales</h5>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="weeklySalesChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Customer Distribution -->
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-pie-chart me-2"></i>Customer Distribution</h5>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="customerDistChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sales Summary -->
-    <c:if test="${not empty salesSummary}">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="bi bi-calculator me-2"></i>Sales Summary</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Average Bill Amount:</strong>
-                            Rs. <fmt:formatNumber value="${salesSummary.averageBillAmount}" pattern="#,##0.00"/>
-                        </p>
-                        <p><strong>Highest Bill Amount:</strong>
-                            Rs. <fmt:formatNumber value="${salesSummary.highestBillAmount}" pattern="#,##0.00"/>
-                        </p>
-                        <p><strong>Lowest Bill Amount:</strong>
-                            Rs. <fmt:formatNumber value="${salesSummary.lowestBillAmount}" pattern="#,##0.00"/>
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Best Selling Item:</strong> ${salesSummary.bestSellingItem}
-                            (${salesSummary.bestSellingItemCount} units)
-                        </p>
-                        <p><strong>Unique Items Sold:</strong> ${salesSummary.uniqueItemsSold}</p>
-                        <c:if test="${lowStockCount > 0}">
-                            <p class="mb-0">
-                                <button class="btn btn-warning btn-sm" onclick="sendLowStockAlert()">
-                                    <i class="bi bi-envelope me-2"></i>Send Low Stock Alert
-                                </button>
-                            </p>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
 
     <!-- Quick Actions -->
-    <div class="card mt-4">
-        <div class="card-header bg-secondary text-white">
-            <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>Quick Actions</h5>
-        </div>
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/customer?action=add"
-                       class="btn btn-outline-primary w-100">
-                        <i class="bi bi-person-plus me-2"></i>Add Customer
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/item?action=add"
-                       class="btn btn-outline-success w-100">
-                        <i class="bi bi-plus-circle me-2"></i>Add Item
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/bill"
-                       class="btn btn-outline-info w-100">
-                        <i class="bi bi-receipt-cutoff me-2"></i>New Bill
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/bill?action=list"
-                       class="btn btn-outline-warning w-100">
-                        <i class="bi bi-list-ul me-2"></i>View Bills
-                    </a>
-                </div>
-            </div>
-        </div>
+    <h3 class="mb-3">Quick Actions</h3>
+    <div class="quick-actions">
+        <a href="${pageContext.request.contextPath}/customer?action=add" class="action-card">
+            <div class="action-icon"><i class="bi bi-person-plus"></i></div>
+            <div>Add Customer</div>
+        </a>
+        <a href="${pageContext.request.contextPath}/item?action=add" class="action-card">
+            <div class="action-icon"><i class="bi bi-plus-circle"></i></div>
+            <div>Add Item</div>
+        </a>
+        <a href="${pageContext.request.contextPath}/bill" class="action-card">
+            <div class="action-icon"><i class="bi bi-receipt-cutoff"></i></div>
+            <div>New Bill</div>
+        </a>
+        <a href="${pageContext.request.contextPath}/export?type=sales&format=excel" class="action-card">
+            <div class="action-icon"><i class="bi bi-download"></i></div>
+            <div>Export Report</div>
+        </a>
     </div>
 </div>
 
@@ -374,167 +444,77 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
 <script>
-    // Load chart data on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        loadChartData();
+    // Chart configurations with dark theme
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = '#334155';
+
+    // Revenue Chart
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Revenue',
+                data: [30000, 35000, 32000, 40000, 38000, 45000, 50000, 48000, 52000, 55000, 58000, 60000],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: '#334155'
+                    }
+                },
+                y: {
+                    grid: {
+                        color: '#334155'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return 'Rs ' + value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
     });
 
-    function loadChartData() {
-        fetch('${pageContext.request.contextPath}/api/chart?type=dashboard')
-            .then(response => response.json())
-            .then(data => {
-                createMonthlyChart(data.monthly);
-                createWeeklyChart(data.weekly);
-                createTopItemsChart(data.topItems);
-                createCustomerDistChart(data.customerTypes);
-            })
-            .catch(error => console.error('Error loading charts:', error));
-    }
-
-    function createMonthlyChart(data) {
-        const ctx = document.getElementById('monthlySalesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Object.keys(data),
-                datasets: [{
-                    label: 'Monthly Sales (Rs.)',
-                    data: Object.values(data),
-                    borderColor: 'rgb(102, 126, 234)',
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'Rs. ' + value.toLocaleString();
-                            }
-                        }
+    // Top Items Chart
+    const topItemsCtx = document.getElementById('topItemsChart').getContext('2d');
+    new Chart(topItemsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Notebooks', 'Pens', 'Calculators', 'Others'],
+            datasets: [{
+                data: [35, 25, 20, 20],
+                backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15
                     }
                 }
             }
-        });
-    }
-
-    function createWeeklyChart(data) {
-        const ctx = document.getElementById('weeklySalesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: Object.keys(data),
-                datasets: [{
-                    label: 'Daily Sales (Rs.)',
-                    data: Object.values(data),
-                    backgroundColor: 'rgba(72, 187, 120, 0.8)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'Rs. ' + value.toLocaleString();
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    function createTopItemsChart(data) {
-        const ctx = document.getElementById('topItemsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: data.map(item => item.name),
-                datasets: [{
-                    data: data.map(item => item.quantity),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 205, 86, 0.8)',
-                        'rgba(75, 192, 192, 0.8)',
-                        'rgba(153, 102, 255, 0.8)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    }
-
-    function createCustomerDistChart(data) {
-        const ctx = document.getElementById('customerDistChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: Object.keys(data),
-                datasets: [{
-                    data: Object.values(data),
-                    backgroundColor: [
-                        'rgba(66, 153, 225, 0.8)',
-                        'rgba(237, 137, 54, 0.8)',
-                        'rgba(114, 75, 162, 0.8)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    }
-
-    function sendLowStockAlert() {
-        if (confirm('Send low stock alert email to admin?')) {
-            fetch('${pageContext.request.contextPath}/export', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=sendLowStockAlert'
-            })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                })
-                .catch(error => {
-                    alert('Error sending alert: ' + error);
-                });
         }
-    }
+    });
 </script>
 </body>
 </html>
