@@ -12,7 +12,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/pahana_edu_db";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "";
 
     private DBConnection() throws SQLException {
         try {

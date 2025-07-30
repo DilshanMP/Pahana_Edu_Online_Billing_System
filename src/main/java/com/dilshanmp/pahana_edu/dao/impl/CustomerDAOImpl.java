@@ -1,17 +1,16 @@
 package com.dilshanmp.pahana_edu.dao.impl;
 
-
 import com.dilshanmp.pahana_edu.dao.CustomerDAO;
 import com.dilshanmp.pahana_edu.model.Customer;
 import com.dilshanmp.pahana_edu.util.DBConnection;
-
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/** * Customer DAO Implementation */
+/**
+ * Customer DAO Implementation
+ */
 public class CustomerDAOImpl implements CustomerDAO {
 
     private Connection getConnection() throws SQLException {
@@ -142,7 +141,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return null;
     }
 
-    // Helper method to extract Customer from ResultSet
+
     private Customer extractCustomerFromResultSet(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
         customer.setId(rs.getInt("id"));
@@ -150,8 +149,17 @@ public class CustomerDAOImpl implements CustomerDAO {
         customer.setEmail(rs.getString("email"));
         customer.setPhone(rs.getString("phone"));
         customer.setAddress(rs.getString("address"));
-        customer.setCreatedAt(rs.getTimestamp("created_at"));
-        customer.setUpdateAt(rs.getTimestamp("updated_at"));
+
+        try {
+            Timestamp created = rs.getTimestamp("created_at");
+            if (created != null) customer.setCreatedAt(created);
+        } catch (SQLException ignored) {}
+
+        try {
+            Timestamp updated = rs.getTimestamp("updated_at");
+            if (updated != null) customer.setUpdateAt(updated);
+        } catch (SQLException ignored) {}
+
         return customer;
     }
 }

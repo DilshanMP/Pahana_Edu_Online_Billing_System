@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: pasiya
-  Date: 7/24/2025
-  Time: 6:52 PM
+  User: pasiy
+  Date: 7/19/2025
+  Time: 5:11 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -79,7 +79,7 @@
 
             <!-- Error Alert -->
             <c:if test="${not empty error}">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" >
                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
                         ${error}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -126,7 +126,7 @@
             <div class="text-center text-muted">
                 <small>
                     <i class="bi bi-info-circle me-1"></i>
-                    Default credentials: admin / admin123
+                    Forgot password ? Contact your IT Admin
                 </small>
             </div>
         </div>
