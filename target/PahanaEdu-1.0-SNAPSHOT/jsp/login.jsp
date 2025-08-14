@@ -126,7 +126,8 @@
             <div class="text-center text-muted">
                 <small>
                     <i class="bi bi-info-circle me-1"></i>
-                    Forgot password ? Contact your IT Admin
+                    Forgot password ? Contact your IT Admin<br>
+                    Temp log!: Username : admin | Password : admin123
                 </small>
             </div>
         </div>
