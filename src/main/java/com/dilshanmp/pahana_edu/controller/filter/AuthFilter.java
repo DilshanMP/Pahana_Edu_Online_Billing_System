@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Authentication Filter - Protects secured pages
- * Applies to all URLs except login, logout, and static resources
- */
+
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        // Initialization if needed
+
     }
 
     @Override
@@ -55,6 +52,6 @@ public class AuthFilter implements Filter {
 
     @Override
     public void destroy() {
-        // Cleanup if needed
+
     }
 }
