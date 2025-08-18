@@ -10,7 +10,7 @@ public class Item extends BaseModel {
 
     @Override
     public String getDisplayName() {
-        return null;
+        return name;
     }
 
     public Item() {

@@ -41,19 +41,15 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public boolean update(Item item) throws SQLException {
-        String sql = "UPDATE INTO items (SET name = ?, description = ?, unit_price = ?, stock_quantity = ? WHERE id = ?) VALUES (?, ?, ?, ?)";
-
+        String sql = "UPDATE items SET name = ?, description = ?, unit_price = ?, stock_quantity = ? WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setString(1, item.getName());
             stmt.setString(2, item.getDescription());
             stmt.setDouble(3, item.getUnitPrice());
             stmt.setInt(4, item.getStockQuantity());
             stmt.setInt(5, item.getId());
-
             return stmt.executeUpdate() > 0;
-
         }
     }
 
